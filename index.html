@@ -7,16 +7,15 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
-            --bg-color: #080310;
-            --card-bg: #130624;
-            --border-color: #2D144D;
-            --accent-purple: #7B2CBF;
-            --accent-glow: rgba(123, 44, 191, 0.25);
-            --text-main: #F3F0FF;
-            --text-muted: #9D8EC4;
-            --green: #00E676;
-            --red: #FF3D71;
-            --gold: #FFD700;
+            --bg-color: #05020a;
+            --card-bg: #0f071c;
+            --card-border: rgba(138, 43, 226, 0.2);
+            --accent-purple: #8A2BE2;
+            --accent-glow: rgba(138, 43, 226, 0.35);
+            --text-main: #FFFFFF;
+            --text-muted: #8E78B3;
+            --green: #00FF7F;
+            --red: #FF4D4D;
         }
 
         * {
@@ -29,17 +28,21 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding: 16px;
-            padding-bottom: 80px;
+            padding: 12px;
+            padding-bottom: 90px;
         }
 
+        /* Премиальная шапка */
         header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 14px;
+            background: linear-gradient(135deg, #16082b, #0b0415);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 14px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
         }
 
         .company-branding {
@@ -49,101 +52,115 @@
         }
 
         .logo-frame {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             overflow: hidden;
-            background: linear-gradient(135deg, #4A1594, #240B4A);
+            background: linear-gradient(135deg, var(--accent-purple), #4a1594);
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--accent-purple);
-            box-shadow: 0 0 10px var(--accent-glow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        .logo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+            .logo-frame img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
 
         .logo-fallback {
-            font-weight: 700;
+            font-weight: 800;
             font-size: 20px;
             color: #FFFFFF;
         }
 
         .company-info h1 {
-            font-size: 17px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
             color: #FFFFFF;
         }
 
         .company-info p {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 1.2px;
+            margin-top: 2px;
         }
 
         .status-badge {
-            background-color: rgba(0, 230, 118, 0.1);
-            border: 1px solid rgba(0, 230, 118, 0.3);
+            background: rgba(0, 255, 127, 0.1);
+            border: 1px solid rgba(0, 255, 127, 0.3);
             color: var(--green);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
         }
 
+        /* Навигационные табы */
         .nav-tabs {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             overflow-x: auto;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             padding-bottom: 4px;
         }
 
-        .nav-tabs::-webkit-scrollbar { display: none; }
+            .nav-tabs::-webkit-scrollbar {
+                display: none;
+            }
 
         .tab-item {
             background-color: var(--card-bg);
             color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            padding: 8px 14px;
-            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            padding: 10px 16px;
+            border-radius: 12px;
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             white-space: nowrap;
+            transition: 0.2s ease;
         }
 
-        .tab-item.active {
-            background-color: var(--accent-purple);
-            color: #FFFFFF;
-            border-color: #9D4EDD;
-            box-shadow: 0 0 12px var(--accent-glow);
+            .tab-item.active {
+                background: linear-gradient(135deg, var(--accent-purple), #5a189a);
+                color: #FFFFFF;
+                border-color: rgba(255, 255, 255, 0.3);
+                box-shadow: 0 0 15px var(--accent-glow);
+            }
+
+        .section-pane {
+            display: none;
         }
 
-        .section-pane { display: none; }
-        .section-pane.active { display: block; }
+            .section-pane.active {
+                display: block;
+            }
 
+        /* Карточки */
         .corporate-card {
             background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
             padding: 16px;
             margin-bottom: 14px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
         }
 
         .card-title {
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
+            letter-spacing: 0.8px;
+            margin-bottom: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -153,62 +170,90 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(45, 20, 77, 0.4);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.15);
             font-size: 14px;
         }
 
-        .data-row:last-child { border-bottom: none; }
-        .positive { color: var(--green); font-weight: 600; }
-        .negative { color: var(--red); font-weight: 600; }
+            .data-row:last-child {
+                border-bottom: none;
+            }
 
-        .input-group { margin-bottom: 12px; }
-        .input-group label {
-            display: block;
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
+        .positive {
+            color: var(--green);
+            font-weight: 700;
         }
+
+        .negative {
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        /* Поля ввода */
+        .input-group {
+            margin-bottom: 14px;
+        }
+
+            .input-group label {
+                display: block;
+                font-size: 11px;
+                color: var(--text-muted);
+                margin-bottom: 6px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
 
         .input-control, .select-control {
             width: 100%;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 10px 12px;
+            background-color: #05020a;
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 12px;
             color: var(--text-main);
-            font-size: 14px;
+            font-size: 15px;
             outline: none;
+            transition: border-color 0.2s;
         }
+
+            .input-control:focus, .select-control:focus {
+                border-color: var(--accent-purple);
+                box-shadow: 0 0 10px var(--accent-glow);
+            }
 
         .btn-corporate {
             width: 100%;
-            background: linear-gradient(135deg, #7B2CBF, #5A189A);
+            background: linear-gradient(135deg, var(--accent-purple), #5a189a);
             color: #FFFFFF;
             border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 8px;
-            box-shadow: 0 4px 15px var(--accent-glow);
+            margin-top: 6px;
+            box-shadow: 0 4px 20px var(--accent-glow);
         }
 
         .output-box {
-            background-color: var(--bg-color);
-            border-left: 3px solid var(--accent-purple);
-            padding: 12px;
-            border-radius: 6px;
-            margin-top: 14px;
-            font-size: 13px;
+            background-color: #05020a;
+            border-left: 4px solid var(--accent-purple);
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-size: 14px;
             line-height: 1.6;
+            border-top: 1px solid var(--card-border);
+            border-right: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
         }
 
-        /* Контейнер графика TradingView */
-        .tradingview-widget-container {
-            height: 350px;
+        /* Полноэкранный живой график */
+        .tradingview-container {
             width: 100%;
+            height: 520px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
         }
     </style>
 </head>
@@ -225,7 +270,7 @@
                 <p>Institutional Terminal</p>
             </div>
         </div>
-        <div class="status-badge">ENTERPRISE</div>
+        <div class="status-badge">Enterprise</div>
     </header>
 
     <div class="nav-tabs">
@@ -240,7 +285,7 @@
         <div class="corporate-card">
             <div class="card-title">
                 <span>Спотовый терминал (Bybit)</span>
-                <span style="font-size: 11px; color: var(--text-muted);">LIVE FEED</span>
+                <span style="font-size: 10px; color: var(--green);">● REAL-TIME</span>
             </div>
             <div id="market-container">
                 <div class="data-row"><span>Синхронизация шлюзов...</span></div>
@@ -248,11 +293,13 @@
         </div>
     </div>
 
-    <!-- Секция 2: Живой график TradingView -->
+    <!-- Секция 2: Полноэкранный график TradingView -->
     <div id="charts" class="section-pane">
-        <div class="corporate-card">
-            <div class="card-title">Живой график (BTC/USDT)</div>
-            <div class="tradingview-widget-container">
+        <div class="corporate-card" style="padding: 10px;">
+            <div class="card-title" style="padding: 6px 6px 12px 6px;">
+                <span>Институциональный график (BTC/USDT)</span>
+            </div>
+            <div class="tradingview-container">
                 <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
@@ -277,7 +324,7 @@
     <!-- Секция 3: Калькулятор риска -->
     <div id="calc" class="section-pane">
         <div class="corporate-card">
-            <div class="card-title">Институциональный расчет позиции</div>
+            <div class="card-title">Расчет позиции и маржи</div>
             <div class="input-group">
                 <label>Депозит (USDT)</label>
                 <input type="number" id="calc-dep" class="input-control" value="1000">
@@ -302,109 +349,109 @@
     <!-- Секция 4: Профиль -->
     <div id="account" class="section-pane">
         <div class="corporate-card">
-            <div class="card-title">Информация об учетной записи</div>
-            <div class="data-row"><span style="color: var(--text-muted);">Пользователь:</span> <span id="user-nic">Авторизация...</span></div>
-            <div class="data-row"><span style="color: var(--text-muted);">Тип подписки:</span> <span style="color: var(--green); font-weight: 600;">PRO Enterprise</span></div>
-            <div class="data-row"><span style="color: var(--text-muted);">Шифрование:</span> <span>AES-256 Active</span></div>
+            <div class="card-title">Безопасность и аккаунт</div>
+            <div class="data-row"><span style="color: var(--text-muted);">Пользователь:</span> <span id="user-nic" style="font-weight: 600;">Авторизация...</span></div>
+            <div class="data-row"><span style="color: var(--text-muted);">Тип подписки:</span> <span style="color: var(--green); font-weight: 700;">PRO Enterprise</span></div>
+            <div class="data-row"><span style="color: var(--text-muted);">Протокол шифрования:</span> <span style="font-weight: 600;">AES-256-GCM</span></div>
         </div>
     </div>
 
     <script>
-        // @ts-nocheck
-        const tgApp = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
-        if (tgApp) {
-            tgApp.expand();
-            if (tgApp.initDataUnsafe && tgApp.initDataUnsafe.user && tgApp.initDataUnsafe.user.first_name) {
-                const userNicEl = document.getElementById('user-nic');
-                if (userNicEl) {
-                    userNicEl.innerText = tgApp.initDataUnsafe.user.first_name;
-                }
-            }
-        }
-
-        function switchSection(sectionId, event) {
-            document.querySelectorAll('.section-pane').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
-            
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) targetSection.classList.add('active');
-            
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
-        }
-
-        async function fetchMarketData() {
-            try {
-                let response = await fetch('https://api.bybit.com/v5/market/tickers?category=spot');
-                let resData = await response.json();
-                let tickers = resData.result.list;
-                let watchList = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "TONUSDT", "XRPUSDT"];
-                let htmlContent = "";
-
-                tickers.forEach(item => {
-                    if (watchList.includes(item.symbol)) {
-                        let priceVal = parseFloat(item.lastPrice).toLocaleString('en-US', {minimumFractionDigits: 2});
-                        let changeVal = parseFloat(item.price24hPcnt) * 100;
-                        let cssClass = changeVal >= 0 ? "positive" : "negative";
-                        let prefix = changeVal >= 0 ? "+" : "";
-                        let coinName = item.symbol.replace("USDT", "");
-                        
-                        htmlContent += `<div class="data-row">
-                            <span><b>${coinName}</b> / USDT</span>
-                            <span>$${priceVal}</span>
-                            <span class="${cssClass}">${prefix}${changeVal.toFixed(2)}%</span>
-                        </div>`;
+                // @ts-nocheck
+                const tgApp = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+                if (tgApp) {
+                    tgApp.expand();
+                    if (tgApp.initDataUnsafe && tgApp.initDataUnsafe.user && tgApp.initDataUnsafe.user.first_name) {
+                        const userNicEl = document.getElementById('user-nic');
+                        if (userNicEl) {
+                            userNicEl.innerText = tgApp.initDataUnsafe.user.first_name;
+                        }
                     }
-                });
-                
-                const marketContainer = document.getElementById('market-container');
-                if (marketContainer) {
-                    marketContainer.innerHTML = htmlContent;
                 }
-            } catch (err) {
-                const marketContainer = document.getElementById('market-container');
-                if (marketContainer) {
-                    marketContainer.innerHTML = `<div class="data-row">Ошибка получения данных API.</div>`;
+
+                function switchSection(sectionId, event) {
+                    document.querySelectorAll('.section-pane').forEach(el => el.classList.remove('active'));
+                    document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
+
+                    const targetSection = document.getElementById(sectionId);
+                    if (targetSection) targetSection.classList.add('active');
+
+                    if (event && event.currentTarget) {
+                        event.currentTarget.classList.add('active');
+                    }
                 }
-            }
-        }
 
-        function executeRiskCalculation() {
-            const depInput = document.getElementById('calc-dep');
-            const rsInput = document.getElementById('calc-rs');
-            const enInput = document.getElementById('calc-en');
-            const slInput = document.getElementById('calc-sl');
+                async function fetchMarketData() {
+                    try {
+                        let response = await fetch('https://api.bybit.com/v5/market/tickers?category=spot');
+                        let resData = await response.json();
+                        let tickers = resData.result.list;
+                        let watchList = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "TONUSDT", "XRPUSDT"];
+                        let htmlContent = "";
 
-            if (!depInput || !rsInput || !enInput || !slInput) return;
+                        tickers.forEach(item => {
+                            if (watchList.includes(item.symbol)) {
+                                let priceVal = parseFloat(item.lastPrice).toLocaleString('en-US', {minimumFractionDigits: 2});
+                                let changeVal = parseFloat(item.price24hPcnt) * 100;
+                                let cssClass = changeVal >= 0 ? "positive" : "negative";
+                                let prefix = changeVal >= 0 ? "+" : "";
+                                let coinName = item.symbol.replace("USDT", "");
 
-            let depVal = parseFloat(depInput.value) || 0;
-            let riskVal = parseFloat(rsInput.value) || 0;
-            let entryVal = parseFloat(enInput.value) || 0;
-            let stopLossVal = parseFloat(slInput.value) || 0;
+                                htmlContent += `<div class="data-row">
+                                    <span><b>${coinName}</b> / USDT</span>
+                                    <span style="font-weight: 600;">$${priceVal}</span>
+                                    <span class="${cssClass}">${prefix}${changeVal.toFixed(2)}%</span>
+                                </div>`;
+                            }
+                        });
 
-            let riskUsdAmount = depVal * (riskVal / 100);
-            let slDistance = entryVal > 0 ? Math.abs(entryVal - stopLossVal) / entryVal : 0;
-            let positionSizeUsd = slDistance > 0 ? riskUsdAmount / slDistance : 0;
-            let leverageSuggested = depVal > 0 ? Math.max(1, Math.ceil(positionSizeUsd / depVal)) : 1;
+                        const marketContainer = document.getElementById('market-container');
+                        if (marketContainer) {
+                            marketContainer.innerHTML = htmlContent;
+                        }
+                    } catch (err) {
+                        const marketContainer = document.getElementById('market-container');
+                        if (marketContainer) {
+                            marketContainer.innerHTML = `<div class="data-row">Ошибка получения данных API.</div>`;
+                        }
+                    }
+                }
 
-            let reportHtml = `
-                <b>Результат расчета:</b><br>
-                • Направление: <b>${stopLossVal < entryVal ? 'LONG 🟢' : 'SHORT 🔴'}</b><br>
-                • Риск на капитал: <b>$${riskUsdAmount.toFixed(2)}</b> (${riskVal}%)<br>
-                • Объем позиции: <b>$${positionSizeUsd.toFixed(2)}</b><br>
-                • Рекоменд. плечо: <b>до ${leverageSuggested}x</b>
-            `;
-            
-            let boxElement = document.getElementById('calc-output');
-            if (boxElement) {
-                boxElement.style.display = 'block';
-                boxElement.innerHTML = reportHtml;
-            }
-        }
+                function executeRiskCalculation() {
+                    const depInput = document.getElementById('calc-dep');
+                    const rsInput = document.getElementById('calc-rs');
+                    const enInput = document.getElementById('calc-en');
+                    const slInput = document.getElementById('calc-sl');
 
-        fetchMarketData();
-        setInterval(fetchMarketData, 10000);
+                    if (!depInput || !rsInput || !enInput || !slInput) return;
+
+                    let depVal = parseFloat(depInput.value) || 0;
+                    let riskVal = parseFloat(rsInput.value) || 0;
+                    let entryVal = parseFloat(enInput.value) || 0;
+                    let stopLossVal = parseFloat(slInput.value) || 0;
+
+                    let riskUsdAmount = depVal * (riskVal / 100);
+                    let slDistance = entryVal > 0 ? Math.abs(entryVal - stopLossVal) / entryVal : 0;
+                    let positionSizeUsd = slDistance > 0 ? riskUsdAmount / slDistance : 0;
+                    let leverageSuggested = depVal > 0 ? Math.max(1, Math.ceil(positionSizeUsd / depVal)) : 1;
+
+                    let reportHtml = `
+                        <b>Параметры риск-менеджмента:</b><br>
+                        • Направление: <b>${stopLossVal < entryVal ? 'LONG 🟢' : 'SHORT 🔴'}</b><br>
+                        • Риск на капитал: <b>$${riskUsdAmount.toFixed(2)}</b> (${riskVal}%)<br>
+                        • Объем позиции: <b>$${positionSizeUsd.toFixed(2)}</b><br>
+                        • Рекомендуемое плечо: <b>до ${leverageSuggested}x</b>
+                    `;
+
+                    let boxElement = document.getElementById('calc-output');
+                    if (boxElement) {
+                        boxElement.style.display = 'block';
+                        boxElement.innerHTML = reportHtml;
+                    }
+                }
+
+                fetchMarketData();
+                setInterval(fetchMarketData, 10000);
     </script>
 </body>
 </html>
