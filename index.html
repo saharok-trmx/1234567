@@ -36,7 +36,6 @@
             overflow-x: hidden;
         }
 
-        /* Шапка */
         header {
             display: flex;
             align-items: center;
@@ -69,11 +68,11 @@
             flex-shrink: 0;
         }
 
-        .logo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+            .logo-frame img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
 
         .logo-fallback {
             font-weight: 800;
@@ -107,11 +106,10 @@
             text-transform: uppercase;
         }
 
-        /* Навигация */
         .nav-tabs {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 5px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
             margin-bottom: 10px;
         }
 
@@ -129,17 +127,21 @@
             transition: 0.2s;
         }
 
-        .tab-item.active {
-            background: linear-gradient(135deg, var(--accent-purple), #5a189a);
-            color: #FFFFFF;
-            border-color: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 0 12px var(--accent-glow);
+            .tab-item.active {
+                background: linear-gradient(135deg, var(--accent-purple), #5a189a);
+                color: #FFFFFF;
+                border-color: rgba(255, 255, 255, 0.35);
+                box-shadow: 0 0 12px var(--accent-glow);
+            }
+
+        .section-pane {
+            display: none;
         }
 
-        .section-pane { display: none; }
-        .section-pane.active { display: block; }
+            .section-pane.active {
+                display: block;
+            }
 
-        /* Карточки */
         .corporate-card {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -161,7 +163,6 @@
             align-items: center;
         }
 
-        /* Полоса метрик */
         .metrics-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -197,11 +198,20 @@
             font-size: 13px;
         }
 
-        .data-row:last-child { border-bottom: none; }
-        .positive { color: var(--green); font-weight: 700; }
-        .negative { color: var(--red); font-weight: 700; }
+            .data-row:last-child {
+                border-bottom: none;
+            }
 
-        /* Панель управления графиком */
+        .positive {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .negative {
+            color: var(--red);
+            font-weight: 700;
+        }
+
         .chart-controls {
             display: flex;
             justify-content: space-between;
@@ -227,11 +237,11 @@
             cursor: pointer;
         }
 
-        .coin-pill.active {
-            background: var(--accent-purple);
-            color: #fff;
-            border-color: var(--accent-light);
-        }
+            .coin-pill.active {
+                background: var(--accent-purple);
+                color: #fff;
+                border-color: var(--accent-light);
+            }
 
         .btn-rotate {
             background: rgba(138, 43, 226, 0.2);
@@ -244,7 +254,6 @@
             cursor: pointer;
         }
 
-        /* Контейнер графика и горизонтальный режим (90 градусов) */
         .chart-wrapper {
             position: relative;
             width: 100%;
@@ -256,19 +265,19 @@
             background: #090412;
         }
 
-        .chart-wrapper.landscape-mode {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vh;
-            height: 100vw;
-            min-height: unset;
-            z-index: 99999;
-            border-radius: 0;
-            border: none;
-            transform: rotate(90deg) translateY(-100%);
-            transform-origin: top left;
-        }
+            .chart-wrapper.landscape-mode {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vh;
+                height: 100vw;
+                min-height: unset;
+                z-index: 99999;
+                border-radius: 0;
+                border: none;
+                transform: rotate(90deg) translateY(-100%);
+                transform-origin: top left;
+            }
 
         .exit-landscape-btn {
             display: none;
@@ -284,7 +293,6 @@
             font-size: 12px;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
         .chart-wrapper.landscape-mode .exit-landscape-btn {
@@ -297,22 +305,24 @@
             border: none;
         }
 
-        /* Формы калькулятора */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
         }
 
-        .input-group { margin-bottom: 10px; }
-        .input-group label {
-            display: block;
-            font-size: 10px;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-            font-weight: 600;
-            text-transform: uppercase;
+        .input-group {
+            margin-bottom: 10px;
         }
+
+            .input-group label {
+                display: block;
+                font-size: 10px;
+                color: var(--text-muted);
+                margin-bottom: 4px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
 
         .input-control {
             width: 100%;
@@ -370,7 +380,6 @@
     <div class="nav-tabs">
         <button class="tab-item active" onclick="openTab('market', this)">Рынок</button>
         <button class="tab-item" onclick="openTab('charts', this)">График</button>
-        <button class="tab-item" onclick="openTab('arbitrage', this)">Арбитраж</button>
         <button class="tab-item" onclick="openTab('calc', this)">Риск / PnL</button>
         <button class="tab-item" onclick="openTab('account', this)">Профиль</button>
     </div>
@@ -391,7 +400,7 @@
         <div class="corporate-card">
             <div class="card-title">
                 <span>Спотовые котировки (Bybit)</span>
-                <span style="font-size: 9px; color: var(--green);">● AUTO-SYNC</span>
+                <span style="font-size: 9px; color: var(--green);">● REAL-TIME</span>
             </div>
             <div id="market-container">
                 <div class="data-row"><span>Синхронизация шлюзов...</span></div>
@@ -399,7 +408,7 @@
         </div>
     </div>
 
-    <!-- 2. ПРОФЕССИОНАЛЬНЫЙ ГРАФИК -->
+    <!-- 2. ГРАФИК -->
     <div id="charts" class="section-pane">
         <div class="corporate-card" style="padding: 10px;">
             <div class="chart-controls">
@@ -408,9 +417,8 @@
                     <button class="coin-pill" onclick="changeChartSymbol('ETHUSDT', this)">ETH</button>
                     <button class="coin-pill" onclick="changeChartSymbol('SOLUSDT', this)">SOL</button>
                     <button class="coin-pill" onclick="changeChartSymbol('TONUSDT', this)">TON</button>
-                    <button class="coin-pill" onclick="changeChartSymbol('BNBUSDT', this)">BNB</button>
                 </div>
-                <button class="btn-rotate" onclick="toggleLandscapeChart()">🔄 Горизонтально (90°)</button>
+                <button class="btn-rotate" onclick="toggleLandscapeChart()">🔄 Поворот 90°</button>
             </div>
 
             <div id="chart-box" class="chart-wrapper">
@@ -420,37 +428,21 @@
         </div>
     </div>
 
-    <!-- 3. АРБИТРАЖ И ЛИКВИДНОСТЬ -->
-    <div id="arbitrage" class="section-pane">
-        <div class="corporate-card">
-            <div class="card-title">
-                <span>Мультибиржевой стакан (BTC/USDT)</span>
-                <button class="coin-pill" onclick="loadArbitrage()">↻ Обновить</button>
-            </div>
-            <div id="arb-container">
-                <div class="data-row"><span>Опрос биржевых шлюзов...</span></div>
-            </div>
-            <div id="arb-spread" class="output-box" style="margin-top: 10px;">
-                Вычисление межбиржевого спреда...
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. ПРО-КАЛЬКУЛЯТОР РИСКА И ЛИКВИДАЦИИ -->
+    <!-- 3. КАЛЬКУЛЯТОР С ОТПРАВКОЙ В ЧАТ -->
     <div id="calc" class="section-pane">
         <div class="corporate-card">
-            <div class="card-title">Калькулятор позиции, плеча и PnL</div>
+            <div class="card-title">Институциональный калькулятор риска</div>
             <div class="form-grid">
                 <div class="input-group">
                     <label>Депозит ($)</label>
                     <input type="number" id="calc-dep" class="input-control" value="1000">
                 </div>
                 <div class="input-group">
-                    <label>Риск на сделку (%)</label>
+                    <label>Риск (%)</label>
                     <input type="number" id="calc-rs" class="input-control" value="2">
                 </div>
                 <div class="input-group">
-                    <label>Точка входа ($)</label>
+                    <label>Вход ($)</label>
                     <input type="number" id="calc-en" class="input-control" value="82500">
                 </div>
                 <div class="input-group">
@@ -459,261 +451,188 @@
                 </div>
             </div>
             <div class="input-group">
-                <label>Take-Profit цель ($)</label>
+                <label>Take-Profit ($)</label>
                 <input type="number" id="calc-tp" class="input-control" value="86500">
             </div>
-            <button class="btn-corporate" onclick="executeRiskCalculation()">Рассчитать параметры ордера</button>
+            <button class="btn-corporate" onclick="executeRiskCalculation()">Рассчитать сделку</button>
             <div id="calc-output" class="output-box" style="display: none;"></div>
+            <button id="send-to-chat-btn" class="btn-corporate" style="display:none; background: #00E676; color: #000; margin-top: 8px;" onclick="sendCalculationToChat()">📩 Отправить расчет в чат бота</button>
         </div>
     </div>
 
-    <!-- 5. ПРОФИЛЬ -->
+    <!-- 4. ПРОФИЛЬ -->
     <div id="account" class="section-pane">
         <div class="corporate-card">
-            <div class="card-title">Институциональный профиль</div>
-            <div class="data-row"><span style="color: var(--text-muted);">Трейдер:</span> <span id="user-nic" style="font-weight: 700;">Гость</span></div>
+            <div class="card-title">Профиль трейдера</div>
+            <div class="data-row"><span style="color: var(--text-muted);">Имя:</span> <span id="user-nic" style="font-weight: 700;">Гость</span></div>
             <div class="data-row"><span style="color: var(--text-muted);">Telegram ID:</span> <span id="user-id">---</span></div>
-            <div class="data-row"><span style="color: var(--text-muted);">Лицензия:</span> <span style="color: var(--green); font-weight: 700;">PRO Enterprise</span></div>
-            <div class="data-row"><span style="color: var(--text-muted);">Шлюз котировок:</span> <span>Bybit / Binance Direct</span></div>
-            <div class="data-row"><span style="color: var(--text-muted);">Шифрование:</span> <span>TLS 1.3 / AES-256</span></div>
+            <div class="data-row"><span style="color: var(--text-muted);">Статус:</span> <span style="color: var(--green); font-weight: 700;">PRO Enterprise</span></div>
         </div>
     </div>
 
     <script>
-        var currentSymbol = "BTCUSDT";
-        var chartInitialized = false;
+                // @ts-nocheck
+                var currentSymbol = "BTCUSDT";
+                var chartInitialized = false;
+                var lastCalcData = null;
 
-        // Обработка логотипа без inline-ошибок
-        var logoImg = document.getElementById("brand-logo");
-        var logoFallback = document.getElementById("brand-fallback");
-        if (logoImg) {
-            logoImg.onerror = function() {
-                logoImg.style.display = "none";
-                if (logoFallback) logoFallback.style.display = "block";
-            };
-        }
-
-        // Инициализация Telegram WebApp
-        var tgObj = window["Telegram"];
-        if (tgObj && tgObj.WebApp) {
-            tgObj.WebApp.expand();
-            var usr = tgObj.WebApp.initDataUnsafe && tgObj.WebApp.initDataUnsafe.user;
-            if (usr) {
-                var nicEl = document.getElementById("user-nic");
-                var idEl = document.getElementById("user-id");
-                if (nicEl && usr.first_name) nicEl.innerText = usr.first_name;
-                if (idEl && usr.id) idEl.innerText = String(usr.id);
-            }
-        }
-
-        function buildTradingViewUrl(symbol) {
-            return "https://s.tradingview.com/widgetembed/?" +
-                "symbol=BYBIT:" + symbol +
-                "&interval=60" +
-                "&theme=dark" +
-                "&style=1" +
-                "&locale=ru" +
-                "&toolbarbg=11081f" +
-                "&hide_side_toolbar=1" +
-                "&hide_legend=1" +
-                "&save_image=0" +
-                "&allow_symbol_change=1";
-        }
-
-        function openTab(sectionId, btnEl) {
-            var panes = document.querySelectorAll(".section-pane");
-            for (var i = 0; i < panes.length; i++) {
-                panes[i].classList.remove("active");
-            }
-            var tabs = document.querySelectorAll(".tab-item");
-            for (var j = 0; j < tabs.length; j++) {
-                tabs[j].classList.remove("active");
-            }
-
-            var target = document.getElementById(sectionId);
-            if (target) target.classList.add("active");
-            if (btnEl) btnEl.classList.add("active");
-
-            // Подгружаем график только когда вкладка видима (чтобы размер был 100% четким)
-            if (sectionId === "charts" && !chartInitialized) {
-                var frame = document.getElementById("tv-iframe");
-                if (frame) {
-                    frame.setAttribute("src", buildTradingViewUrl(currentSymbol));
-                    chartInitialized = true;
+                var logoImg = document.getElementById("brand-logo");
+                var logoFallback = document.getElementById("brand-fallback");
+                if (logoImg) {
+                    logoImg.onerror = function() {
+                        logoImg.style.display = "none";
+                        if (logoFallback) logoFallback.style.display = "block";
+                    };
                 }
-            }
-            if (sectionId === "arbitrage") {
-                loadArbitrage();
-            }
-        }
 
-        function changeChartSymbol(sym, pillEl) {
-            currentSymbol = sym;
-            var pills = document.querySelectorAll(".coin-pill");
-            for (var i = 0; i < pills.length; i++) {
-                pills[i].classList.remove("active");
-            }
-            if (pillEl) pillEl.classList.add("active");
-
-            var frame = document.getElementById("tv-iframe");
-            if (frame) {
-                frame.setAttribute("src", buildTradingViewUrl(sym));
-            }
-        }
-
-        function toggleLandscapeChart() {
-            var box = document.getElementById("chart-box");
-            if (box) {
-                box.classList.toggle("landscape-mode");
-            }
-        }
-
-        async function fetchMarketData() {
-            try {
-                var response = await fetch("https://api.bybit.com/v5/market/tickers?category=spot");
-                var resData = await response.json();
-                var tickers = resData.result.list;
-                var watchList = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "TONUSDT", "BNBUSDT", "XRPUSDT", "DOGEUSDT"];
-                var htmlContent = "";
-                var bestCoin = "";
-                var bestChange = -999;
-
-                for (var i = 0; i < tickers.length; i++) {
-                    var item = tickers[i];
-                    if (watchList.indexOf(item.symbol) !== -1) {
-                        var priceNum = parseFloat(item.lastPrice);
-                        var priceVal = priceNum.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 4});
-                        var changeVal = parseFloat(item.price24hPcnt) * 100;
-                        var volVal = (parseFloat(item.turnover24h) / 1000000).toFixed(1);
-                        var cssClass = changeVal >= 0 ? "positive" : "negative";
-                        var prefix = changeVal >= 0 ? "+" : "";
-                        var coinName = item.symbol.replace("USDT", "");
-
-                        if (changeVal > bestChange) {
-                            bestChange = changeVal;
-                            bestCoin = coinName + " (" + prefix + changeVal.toFixed(1) + "%)";
-                        }
-
-                        htmlContent += '<div class="data-row">' +
-                            '<div><b>' + coinName + '</b>/USDT <div style="font-size:10px;color:var(--text-muted);">Vol: $' + volVal + 'M</div></div>' +
-                            '<div style="font-weight:700;">$' + priceVal + '</div>' +
-                            '<div class="' + cssClass + '">' + prefix + changeVal.toFixed(2) + '%</div>' +
-                        '</div>';
+                var tgObj = window["Telegram"];
+                var tgApp = tgObj && tgObj.WebApp ? tgObj.WebApp : null;
+                if (tgApp) {
+                    tgApp.expand();
+                    var usr = tgApp.initDataUnsafe && tgApp.initDataUnsafe.user;
+                    if (usr) {
+                        var nicEl = document.getElementById("user-nic");
+                        var idEl = document.getElementById("user-id");
+                        if (nicEl && usr.first_name) nicEl.innerText = usr.first_name;
+                        if (idEl && usr.id) idEl.innerText = String(usr.id);
                     }
                 }
 
-                var marketContainer = document.getElementById("market-container");
-                if (marketContainer) marketContainer.innerHTML = htmlContent;
-
-                var topMoverEl = document.getElementById("top-mover");
-                if (topMoverEl && bestCoin) topMoverEl.innerText = bestCoin;
-            } catch (err) {
-                var mc = document.getElementById("market-container");
-                if (mc) mc.innerHTML = '<div class="data-row">Ошибка получения данных API.</div>';
-            }
-        }
-
-        async function fetchFearAndGreed() {
-            try {
-                var r = await fetch("https://api.alternative.me/fng/?limit=1");
-                var d = await r.json();
-                var item = d.data[0];
-                var el = document.getElementById("fng-val");
-                if (el) {
-                    el.innerText = item.value + "/100 (" + item.value_classification + ")";
+                function haptic(style) {
+                    if (tgApp && tgApp.HapticFeedback) {
+                        tgApp.HapticFeedback.impactOccurred(style || "light");
+                    }
                 }
-            } catch (e) {}
-        }
 
-        async function loadArbitrage() {
-            var arbContainer = document.getElementById("arb-container");
-            var arbSpread = document.getElementById("arb-spread");
-            if (!arbContainer) return;
-
-            var sources = [
-                { name: "Bybit", url: "https://api.bybit.com/v5/market/tickers?category=spot&symbol=BTCUSDT", getPrice: function(d) { return parseFloat(d.result.list[0].lastPrice); } },
-                { name: "Binance", url: "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT", getPrice: function(d) { return parseFloat(d.price); } },
-                { name: "OKX", url: "https://www.okx.com/api/v5/market/ticker?instId=BTC-USDT", getPrice: function(d) { return parseFloat(d.data[0].last); } }
-            ];
-
-            var html = "";
-            var validPrices = [];
-
-            for (var i = 0; i < sources.length; i++) {
-                var src = sources[i];
-                try {
-                    var resp = await fetch(src.url);
-                    var json = await resp.json();
-                    var p = src.getPrice(json);
-                    validPrices.push({ name: src.name, price: p });
-                    html += '<div class="data-row"><span><b>' + src.name + '</b></span><span style="font-weight:700;">$' + p.toLocaleString("en-US", {minimumFractionDigits: 2}) + '</span></div>';
-                } catch (e) {
-                    html += '<div class="data-row"><span><b>' + src.name + '</b></span><span style="color:var(--text-muted);">Недоступно</span></div>';
+                function buildTradingViewUrl(symbol) {
+                    return "https://s.tradingview.com/widgetembed/?symbol=BYBIT:" + symbol + "&interval=60&theme=dark&style=1&locale=ru&toolbarbg=11081f&hide_side_toolbar=1&hide_legend=1&save_image=0&allow_symbol_change=1";
                 }
-            }
 
-            arbContainer.innerHTML = html;
+                function openTab(sectionId, btnEl) {
+                    haptic("light");
+                    var panes = document.querySelectorAll(".section-pane");
+                    for (var i = 0; i < panes.length; i++) panes[i].classList.remove("active");
+                    var tabs = document.querySelectorAll(".tab-item");
+                    for (var j = 0; j < tabs.length; j++) tabs[j].classList.remove("active");
 
-            if (validPrices.length >= 2 && arbSpread) {
-                validPrices.sort(function(a, b) { return a.price - b.price; });
-                var minEx = validPrices[0];
-                var maxEx = validPrices[validPrices.length - 1];
-                var diffUsd = maxEx.price - minEx.price;
-                var diffPct = (diffUsd / minEx.price) * 100;
+                    var target = document.getElementById(sectionId);
+                    if (target) target.classList.add("active");
+                    if (btnEl) btnEl.classList.add("active");
 
-                arbSpread.innerHTML = "<b>Арбитражная сводка:</b><br>" +
-                    "• Покупка дешевле на: <b>" + minEx.name + " ($" + minEx.price.toFixed(2) + ")</b><br>" +
-                    "• Продажа дороже на: <b>" + maxEx.name + " ($" + maxEx.price.toFixed(2) + ")</b><br>" +
-                    "• Чистый спред: <span class='positive'>$" + diffUsd.toFixed(2) + " (" + diffPct.toFixed(3) + "%)</span>";
-            }
-        }
+                    if (sectionId === "charts" && !chartInitialized) {
+                        var frame = document.getElementById("tv-iframe");
+                        if (frame) {
+                            frame.setAttribute("src", buildTradingViewUrl(currentSymbol));
+                            chartInitialized = true;
+                        }
+                    }
+                }
 
-        function executeRiskCalculation() {
-            var depEl = document.getElementById("calc-dep");
-            var rsEl = document.getElementById("calc-rs");
-            var enEl = document.getElementById("calc-en");
-            var slEl = document.getElementById("calc-sl");
-            var tpEl = document.getElementById("calc-tp");
+                function changeChartSymbol(sym, pillEl) {
+                    haptic("light");
+                    currentSymbol = sym;
+                    var pills = document.querySelectorAll(".coin-pill");
+                    for (var i = 0; i < pills.length; i++) pills[i].classList.remove("active");
+                    if (pillEl) pillEl.classList.add("active");
+                    var frame = document.getElementById("tv-iframe");
+                    if (frame) frame.setAttribute("src", buildTradingViewUrl(sym));
+                }
 
-            var depVal = depEl ? parseFloat(depEl["value"]) || 0 : 0;
-            var riskVal = rsEl ? parseFloat(rsEl["value"]) || 0 : 0;
-            var entryVal = enEl ? parseFloat(enEl["value"]) || 0 : 0;
-            var stopLossVal = slEl ? parseFloat(slEl["value"]) || 0 : 0;
-            var takeProfitVal = tpEl ? parseFloat(tpEl["value"]) || 0 : 0;
+                function toggleLandscapeChart() {
+                    haptic("medium");
+                    var box = document.getElementById("chart-box");
+                    if (box) box.classList.toggle("landscape-mode");
+                }
 
-            if (depVal <= 0 || entryVal <= 0 || stopLossVal <= 0 || entryVal === stopLossVal) return;
+                async function fetchMarketData() {
+                    try {
+                        var response = await fetch("https://api.bybit.com/v5/market/tickers?category=spot");
+                        var resData = await response.json();
+                        var tickers = resData.result.list;
+                        var watchList = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "TONUSDT", "BNBUSDT"];
+                        var htmlContent = "";
+                        var bestCoin = "";
+                        var bestChange = -999;
 
-            var isLong = stopLossVal < entryVal;
-            var riskUsd = depVal * (riskVal / 100);
-            var slDistPct = Math.abs(entryVal - stopLossVal) / entryVal;
-            var posSizeUsd = riskUsd / slDistPct;
-            var coinsAmount = posSizeUsd / entryVal;
-            var leverage = Math.max(1, Math.ceil(posSizeUsd / depVal));
+                        for (var i = 0; i < tickers.length; i++) {
+                            var item = tickers[i];
+                            if (watchList.indexOf(item.symbol) !== -1) {
+                                var priceNum = parseFloat(item.lastPrice);
+                                var priceVal = priceNum.toLocaleString("en-US", {minimumFractionDigits: 2});
+                                var changeVal = parseFloat(item.price24hPcnt) * 100;
+                                var cssClass = changeVal >= 0 ? "positive" : "negative";
+                                var prefix = changeVal >= 0 ? "+" : "";
+                                var coinName = item.symbol.replace("USDT", "");
 
-            // Приблизительная цена ликвидации и потенциальный профит
-            var liqPrice = isLong ? entryVal * (1 - (1 / leverage) * 0.9) : entryVal * (1 + (1 / leverage) * 0.9);
-            var tpDistPct = Math.abs(takeProfitVal - entryVal) / entryVal;
-            var potentialProfit = posSizeUsd * tpDistPct;
-            var rrRatio = riskUsd > 0 ? (potentialProfit / riskUsd).toFixed(2) : "0";
+                                if (changeVal > bestChange) {
+                                    bestChange = changeVal;
+                                    bestCoin = coinName + " (" + prefix + changeVal.toFixed(1) + "%)";
+                                }
 
-            var reportHtml =
-                "<b>Институциональный расчет ордера:</b><br>" +
-                "• Направление: <b class='" + (isLong ? "positive" : "negative") + "'>" + (isLong ? "LONG (Покупка)" : "SHORT (Продажа)") + "</b><br>" +
-                "• Объем позиции: <b>$" + posSizeUsd.toFixed(2) + "</b> (" + coinsAmount.toFixed(4) + " монет)<br>" +
-                "• Риск при Stop-Loss: <b class='negative'>-$" + riskUsd.toFixed(2) + "</b> (" + riskVal + "%)<br>" +
-                "• Ожидаемый профит (TP): <b class='positive'>+$" + potentialProfit.toFixed(2) + "</b> (R:R = 1:" + rrRatio + ")<br>" +
-                "• Рекомендуемое плечо: <b>" + leverage + "x</b> (Ориентир ликв.: $" + liqPrice.toFixed(2) + ")";
+                                htmlContent += '<div class="data-row"><span><b>' + coinName + '</b>/USDT</span><span style="font-weight:700;">$' + priceVal + '</span><span class="' + cssClass + '">' + prefix + changeVal.toFixed(2) + '%</span></div>';
+                            }
+                        }
+                        var mc = document.getElementById("market-container");
+                        if (mc) mc.innerHTML = htmlContent;
+                        var tm = document.getElementById("top-mover");
+                        if (tm && bestCoin) tm.innerText = bestCoin;
+                    } catch (err) {}
+                }
 
-            var boxElement = document.getElementById("calc-output");
-            if (boxElement) {
-                boxElement.style.display = "block";
-                boxElement.innerHTML = reportHtml;
-            }
-        }
+                async function fetchFearAndGreed() {
+                    try {
+                        var r = await fetch("https://api.alternative.me/fng/?limit=1");
+                        var d = await r.json();
+                        var item = d.data[0];
+                        var el = document.getElementById("fng-val");
+                        if (el) el.innerText = item.value + "/100 (" + item.value_classification + ")";
+                    } catch (e) {}
+                }
 
-        fetchMarketData();
-        fetchFearAndGreed();
-        setInterval(fetchMarketData, 10000);
+                function executeRiskCalculation() {
+                    haptic("medium");
+                    var dep = parseFloat(document.getElementById("calc-dep").value) || 0;
+                    var risk = parseFloat(document.getElementById("calc-rs").value) || 0;
+                    var entry = parseFloat(document.getElementById("calc-en").value) || 0;
+                    var sl = parseFloat(document.getElementById("calc-sl").value) || 0;
+                    var tp = parseFloat(document.getElementById("calc-tp").value) || 0;
+
+                    if (dep <= 0 || entry <= 0 || sl <= 0 || entry === sl) return;
+
+                    var isLong = sl < entry;
+                    var riskUsd = dep * (risk / 100);
+                    var slDist = Math.abs(entry - sl) / entry;
+                    var posSize = riskUsd / slDist;
+                    var leverage = Math.max(1, Math.ceil(posSize / dep));
+                    var profitUsd = posSize * (Math.abs(tp - entry) / entry);
+                    var rr = riskUsd > 0 ? (profitUsd / riskUsd).toFixed(2) : "0";
+
+                    lastCalcData = { coin: "BTC", entry: entry, tp: tp, pnl: profitUsd, roi: (profitUsd / dep) * 100 };
+
+                    var reportHtml = "<b>Результат расчета:</b><br>" +
+                        "• Направление: <b class='" + (isLong ? "positive" : "negative") + "'>" + (isLong ? "LONG 🟢" : "SHORT 🔴") + "</b><br>" +
+                        "• Объем позиции: <b>$" + posSize.toFixed(2) + "</b><br>" +
+                        "• Риск: <b class='negative'>-$" + riskUsd.toFixed(2) + "</b><br>" +
+                        "• Потенциальный профит: <b class='positive'>+$" + profitUsd.toFixed(2) + "</b> (R:R = 1:" + rr + ")<br>" +
+                        "• Плечо: <b>" + leverage + "x</b>";
+
+                    var box = document.getElementById("calc-output");
+                    if (box) { box.style.display = "block"; box.innerHTML = reportHtml; }
+                    var sendBtn = document.getElementById("send-to-chat-btn");
+                    if (sendBtn) sendBtn.style.display = "block";
+                }
+
+                function sendCalculationToChat() {
+                    if (tgApp && lastCalcData) {
+                        haptic("heavy");
+                        var payload = JSON.stringify({ action: "save_trade", data: lastCalcData });
+                        tgApp.sendData(payload);
+                    }
+                }
+
+                fetchMarketData();
+                fetchFearAndGreed();
+                setInterval(fetchMarketData, 10000);
     </script>
 </body>
 </html>
