@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hot Crypto | Professional Terminal</title>
-    <!-- Подключаем Telegram WebApp SDK -->
+    <title>Hot Crypto | Institutional Terminal</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
@@ -38,7 +37,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 14px;
         }
@@ -62,11 +61,11 @@
             box-shadow: 0 0 10px var(--accent-glow);
         }
 
-            .logo-frame img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+        .logo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         .logo-fallback {
             font-weight: 700;
@@ -77,7 +76,6 @@
         .company-info h1 {
             font-size: 17px;
             font-weight: 600;
-            letter-spacing: 0.3px;
             color: #FFFFFF;
         }
 
@@ -96,20 +94,17 @@
             border-radius: 6px;
             font-size: 11px;
             font-weight: 600;
-            letter-spacing: 0.5px;
         }
 
         .nav-tabs {
             display: flex;
             gap: 6px;
             overflow-x: auto;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             padding-bottom: 4px;
         }
 
-            .nav-tabs::-webkit-scrollbar {
-                display: none;
-            }
+        .nav-tabs::-webkit-scrollbar { display: none; }
 
         .tab-item {
             background-color: var(--card-bg);
@@ -121,23 +116,17 @@
             font-weight: 500;
             cursor: pointer;
             white-space: nowrap;
-            transition: all 0.2s ease;
         }
 
-            .tab-item.active {
-                background-color: var(--accent-purple);
-                color: #FFFFFF;
-                border-color: #9D4EDD;
-                box-shadow: 0 0 12px var(--accent-glow);
-            }
-
-        .section-pane {
-            display: none;
+        .tab-item.active {
+            background-color: var(--accent-purple);
+            color: #FFFFFF;
+            border-color: #9D4EDD;
+            box-shadow: 0 0 12px var(--accent-glow);
         }
 
-            .section-pane.active {
-                display: block;
-            }
+        .section-pane { display: none; }
+        .section-pane.active { display: block; }
 
         .corporate-card {
             background-color: var(--card-bg);
@@ -169,31 +158,17 @@
             font-size: 14px;
         }
 
-            .data-row:last-child {
-                border-bottom: none;
-            }
+        .data-row:last-child { border-bottom: none; }
+        .positive { color: var(--green); font-weight: 600; }
+        .negative { color: var(--red); font-weight: 600; }
 
-        .positive {
-            color: var(--green);
-            font-weight: 600;
+        .input-group { margin-bottom: 12px; }
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
         }
-
-        .negative {
-            color: var(--red);
-            font-weight: 600;
-        }
-
-        .input-group {
-            margin-bottom: 12px;
-        }
-
-            .input-group label {
-                display: block;
-                font-size: 12px;
-                color: var(--text-muted);
-                margin-bottom: 6px;
-                font-weight: 500;
-            }
 
         .input-control, .select-control {
             width: 100%;
@@ -204,12 +179,7 @@
             color: var(--text-main);
             font-size: 14px;
             outline: none;
-            transition: border-color 0.2s;
         }
-
-            .input-control:focus, .select-control:focus {
-                border-color: var(--accent-purple);
-            }
 
         .btn-corporate {
             width: 100%;
@@ -223,12 +193,7 @@
             cursor: pointer;
             margin-top: 8px;
             box-shadow: 0 4px 15px var(--accent-glow);
-            transition: opacity 0.2s;
         }
-
-            .btn-corporate:active {
-                opacity: 0.85;
-            }
 
         .output-box {
             background-color: var(--bg-color);
@@ -239,6 +204,12 @@
             font-size: 13px;
             line-height: 1.6;
         }
+
+        /* Контейнер графика TradingView */
+        .tradingview-widget-container {
+            height: 350px;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -246,8 +217,7 @@
     <header>
         <div class="company-branding">
             <div class="logo-frame">
-                <!-- Файл logo.png должен находиться в корне репозитория на GitHub -->
-                <img src="logo.png" alt="Corporate Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <img src="logo.png" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <span class="logo-fallback" style="display:none;">HC</span>
             </div>
             <div class="company-info">
@@ -255,16 +225,17 @@
                 <p>Institutional Terminal</p>
             </div>
         </div>
-        <div class="status-badge">SECURE API</div>
+        <div class="status-badge">ENTERPRISE</div>
     </header>
 
     <div class="nav-tabs">
         <button class="tab-item active" onclick="switchSection('market', event)">Рынок</button>
+        <button class="tab-item" onclick="switchSection('charts', event)">📈 График</button>
         <button class="tab-item" onclick="switchSection('calc', event)">Риск-менеджмент</button>
-        <button class="tab-item" onclick="switchSection('exchanges', event)">Ликвидность</button>
         <button class="tab-item" onclick="switchSection('account', event)">Профиль</button>
     </div>
 
+    <!-- Секция 1: Рынок -->
     <div id="market" class="section-pane active">
         <div class="corporate-card">
             <div class="card-title">
@@ -277,18 +248,36 @@
         </div>
     </div>
 
+    <!-- Секция 2: Живой график TradingView -->
+    <div id="charts" class="section-pane">
+        <div class="corporate-card">
+            <div class="card-title">Живой график (BTC/USDT)</div>
+            <div class="tradingview-widget-container">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                  "autosize": true,
+                  "symbol": "BYBIT:BTCUSDT",
+                  "interval": "D",
+                  "timezone": "Etc/UTC",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "ru",
+                  "allow_symbol_change": true,
+                  "calendar": false,
+                  "support_host": "https://www.tradingview.com"
+                }
+                </script>
+                <!-- TradingView Widget END -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Секция 3: Калькулятор риска -->
     <div id="calc" class="section-pane">
         <div class="corporate-card">
-            <div class="card-title">Расчет параметров позиции</div>
-            <div class="input-group">
-                <label>Торговый актив</label>
-                <select id="calc-asset" class="select-control">
-                    <option value="BTCUSDT">BTC/USDT</option>
-                    <option value="ETHUSDT">ETH/USDT</option>
-                    <option value="SOLUSDT">SOL/USDT</option>
-                    <option value="TONUSDT">TON/USDT</option>
-                </select>
-            </div>
+            <div class="card-title">Институциональный расчет позиции</div>
             <div class="input-group">
                 <label>Депозит (USDT)</label>
                 <input type="number" id="calc-dep" class="input-control" value="1000">
@@ -310,146 +299,112 @@
         </div>
     </div>
 
-    <div id="exchanges" class="section-pane">
-        <div class="corporate-card">
-            <div class="card-title">Мультибиржевой индекс (BTC)</div>
-            <div id="exchanges-container">
-                <div class="data-row"><span>Анализ ордербуков...</span></div>
-            </div>
-        </div>
-    </div>
-
+    <!-- Секция 4: Профиль -->
     <div id="account" class="section-pane">
         <div class="corporate-card">
             <div class="card-title">Информация об учетной записи</div>
             <div class="data-row"><span style="color: var(--text-muted);">Пользователь:</span> <span id="user-nic">Авторизация...</span></div>
             <div class="data-row"><span style="color: var(--text-muted);">Тип подписки:</span> <span style="color: var(--green); font-weight: 600;">PRO Enterprise</span></div>
-            <div class="data-row"><span style="color: var(--text-muted);">Безопасность:</span> <span>Шифрование AES-256</span></div>
+            <div class="data-row"><span style="color: var(--text-muted);">Шифрование:</span> <span>AES-256 Active</span></div>
         </div>
     </div>
 
     <script>
-                // @ts-nocheck
-                const tgApp = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
-                if (tgApp) {
-                    tgApp.expand();
-                    if (tgApp.initDataUnsafe && tgApp.initDataUnsafe.user && tgApp.initDataUnsafe.user.first_name) {
-                        const userNicEl = document.getElementById('user-nic');
-                        if (userNicEl) {
-                            userNicEl.innerText = tgApp.initDataUnsafe.user.first_name;
-                        }
-                    }
+        // @ts-nocheck
+        const tgApp = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+        if (tgApp) {
+            tgApp.expand();
+            if (tgApp.initDataUnsafe && tgApp.initDataUnsafe.user && tgApp.initDataUnsafe.user.first_name) {
+                const userNicEl = document.getElementById('user-nic');
+                if (userNicEl) {
+                    userNicEl.innerText = tgApp.initDataUnsafe.user.first_name;
                 }
+            }
+        }
 
-                function switchSection(sectionId, event) {
-                    document.querySelectorAll('.section-pane').forEach(el => el.classList.remove('active'));
-                    document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
+        function switchSection(sectionId, event) {
+            document.querySelectorAll('.section-pane').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
+            
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) targetSection.classList.add('active');
+            
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+        }
 
-                    const targetSection = document.getElementById(sectionId);
-                    if (targetSection) targetSection.classList.add('active');
+        async function fetchMarketData() {
+            try {
+                let response = await fetch('https://api.bybit.com/v5/market/tickers?category=spot');
+                let resData = await response.json();
+                let tickers = resData.result.list;
+                let watchList = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "TONUSDT", "XRPUSDT"];
+                let htmlContent = "";
 
-                    if (event && event.currentTarget) {
-                        event.currentTarget.classList.add('active');
+                tickers.forEach(item => {
+                    if (watchList.includes(item.symbol)) {
+                        let priceVal = parseFloat(item.lastPrice).toLocaleString('en-US', {minimumFractionDigits: 2});
+                        let changeVal = parseFloat(item.price24hPcnt) * 100;
+                        let cssClass = changeVal >= 0 ? "positive" : "negative";
+                        let prefix = changeVal >= 0 ? "+" : "";
+                        let coinName = item.symbol.replace("USDT", "");
+                        
+                        htmlContent += `<div class="data-row">
+                            <span><b>${coinName}</b> / USDT</span>
+                            <span>$${priceVal}</span>
+                            <span class="${cssClass}">${prefix}${changeVal.toFixed(2)}%</span>
+                        </div>`;
                     }
+                });
+                
+                const marketContainer = document.getElementById('market-container');
+                if (marketContainer) {
+                    marketContainer.innerHTML = htmlContent;
                 }
-
-                async function fetchMarketData() {
-                    try {
-                        let response = await fetch('https://api.bybit.com/v5/market/tickers?category=spot');
-                        let resData = await response.json();
-                        let tickers = resData.result.list;
-                        let watchList = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "TONUSDT", "XRPUSDT"];
-                        let htmlContent = "";
-
-                        tickers.forEach(item => {
-                            if (watchList.includes(item.symbol)) {
-                                let priceVal = parseFloat(item.lastPrice).toLocaleString('en-US', {minimumFractionDigits: 2});
-                                let changeVal = parseFloat(item.price24hPcnt) * 100;
-                                let cssClass = changeVal >= 0 ? "positive" : "negative";
-                                let prefix = changeVal >= 0 ? "+" : "";
-                                let coinName = item.symbol.replace("USDT", "");
-
-                                htmlContent += `<div class="data-row">
-                                    <span><b>${coinName}</b> / USDT</span>
-                                    <span>$${priceVal}</span>
-                                    <span class="${cssClass}">${prefix}${changeVal.toFixed(2)}%</span>
-                                </div>`;
-                            }
-                        });
-
-                        const marketContainer = document.getElementById('market-container');
-                        if (marketContainer) {
-                            marketContainer.innerHTML = htmlContent;
-                        }
-                    } catch (err) {
-                        const marketContainer = document.getElementById('market-container');
-                        if (marketContainer) {
-                            marketContainer.innerHTML = `<div class="data-row">Ошибка получения данных API.</div>`;
-                        }
-                    }
+            } catch (err) {
+                const marketContainer = document.getElementById('market-container');
+                if (marketContainer) {
+                    marketContainer.innerHTML = `<div class="data-row">Ошибка получения данных API.</div>`;
                 }
+            }
+        }
 
-                async function fetchExchangesData() {
-                    let containerHtml = "";
-                    let nodes = [
-                        {name: "Bybit", endpoint: "https://api.bybit.com/v5/market/tickers?category=spot&symbol=BTCUSDT", parseFn: d => d.result.list[0].lastPrice},
-                        {name: "Binance", endpoint: "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT", parseFn: d => d.price},
-                        {name: "MEXC", endpoint: "https://api.mexc.com/api/v3/ticker/price?symbol=BTCUSDT", parseFn: d => d.price}
-                    ];
+        function executeRiskCalculation() {
+            const depInput = document.getElementById('calc-dep');
+            const rsInput = document.getElementById('calc-rs');
+            const enInput = document.getElementById('calc-en');
+            const slInput = document.getElementById('calc-sl');
 
-                    for (let node of nodes) {
-                        try {
-                            let req = await fetch(node.endpoint);
-                            let payload = await req.json();
-                            let cost = parseFloat(node.parseFn(payload)).toLocaleString('en-US', {minimumFractionDigits: 2});
-                            containerHtml += `<div class="data-row"><span><b>${node.name}</b></span><span>$${cost}</span></div>`;
-                        } catch(e) {
-                            containerHtml += `<div class="data-row"><span><b>${node.name}</b></span><span style="color:var(--red);">Таймаут шлюза</span></div>`;
-                        }
-                    }
+            if (!depInput || !rsInput || !enInput || !slInput) return;
 
-                    const exchangesContainer = document.getElementById('exchanges-container');
-                    if (exchangesContainer) {
-                        exchangesContainer.innerHTML = containerHtml;
-                    }
-                }
+            let depVal = parseFloat(depInput.value) || 0;
+            let riskVal = parseFloat(rsInput.value) || 0;
+            let entryVal = parseFloat(enInput.value) || 0;
+            let stopLossVal = parseFloat(slInput.value) || 0;
 
-                function executeRiskCalculation() {
-                    const depInput = document.getElementById('calc-dep');
-                    const rsInput = document.getElementById('calc-rs');
-                    const enInput = document.getElementById('calc-en');
-                    const slInput = document.getElementById('calc-sl');
+            let riskUsdAmount = depVal * (riskVal / 100);
+            let slDistance = entryVal > 0 ? Math.abs(entryVal - stopLossVal) / entryVal : 0;
+            let positionSizeUsd = slDistance > 0 ? riskUsdAmount / slDistance : 0;
+            let leverageSuggested = depVal > 0 ? Math.max(1, Math.ceil(positionSizeUsd / depVal)) : 1;
 
-                    if (!depInput || !rsInput || !enInput || !slInput) return;
+            let reportHtml = `
+                <b>Результат расчета:</b><br>
+                • Направление: <b>${stopLossVal < entryVal ? 'LONG 🟢' : 'SHORT 🔴'}</b><br>
+                • Риск на капитал: <b>$${riskUsdAmount.toFixed(2)}</b> (${riskVal}%)<br>
+                • Объем позиции: <b>$${positionSizeUsd.toFixed(2)}</b><br>
+                • Рекоменд. плечо: <b>до ${leverageSuggested}x</b>
+            `;
+            
+            let boxElement = document.getElementById('calc-output');
+            if (boxElement) {
+                boxElement.style.display = 'block';
+                boxElement.innerHTML = reportHtml;
+            }
+        }
 
-                    let depVal = parseFloat(depInput.value) || 0;
-                    let riskVal = parseFloat(rsInput.value) || 0;
-                    let entryVal = parseFloat(enInput.value) || 0;
-                    let stopLossVal = parseFloat(slInput.value) || 0;
-
-                    let riskUsdAmount = depVal * (riskVal / 100);
-                    let slDistance = entryVal > 0 ? Math.abs(entryVal - stopLossVal) / entryVal : 0;
-                    let positionSizeUsd = slDistance > 0 ? riskUsdAmount / slDistance : 0;
-                    let leverageSuggested = depVal > 0 ? Math.max(1, Math.ceil(positionSizeUsd / depVal)) : 1;
-
-                    let reportHtml = `
-                        <b>Результат институционального расчета:</b><br>
-                        • Направление: <b>${stopLossVal < entryVal ? 'LONG (Покупка)' : 'SHORT (Продажа)'}</b><br>
-                        • Риск на капитал: <b>$${riskUsdAmount.toFixed(2)}</b> (${riskVal}%)<br>
-                        • Рекомендуемый объем: <b>$${positionSizeUsd.toFixed(2)}</b><br>
-                        • Кредитное плечо: <b>до ${leverageSuggested}x</b>
-                    `;
-
-                    let boxElement = document.getElementById('calc-output');
-                    if (boxElement) {
-                        boxElement.style.display = 'block';
-                        boxElement.innerHTML = reportHtml;
-                    }
-                }
-
-                fetchMarketData();
-                fetchExchangesData();
-                setInterval(fetchMarketData, 10000);
+        fetchMarketData();
+        setInterval(fetchMarketData, 10000);
     </script>
 </body>
 </html>
